@@ -4,9 +4,10 @@
 using namespace std;
 
 void merge(vector<int> &v, int i, int m, int j){
-    vector<int> temp(v.begin()+i, v.begin()+m+1); // 前半段（即要用于归并的第一部分）复制到一个临时数组中以免被覆盖
+    // 将v中前半段（即要用于归并的第一部分）复制到一个临时数组中以免被覆盖
+    vector<int> temp(v.begin()+i, v.begin()+m+1); 
     int a = 0;
-    //直到temp中的数全排入v中结束
+    // 直到temp中的数全排入v中结束
     while(a < temp.size()){
         if(m+1 > j  || temp[a] <= v[m+1]){
             v[i] = temp[a];
@@ -21,6 +22,26 @@ void merge(vector<int> &v, int i, int m, int j){
     return;
 }
 
+// void merge2(vector<int> &v, int i, int m, int j){
+//     vector<int> temp1(v.begin()+i, v.begin()+m+1); 
+//     vector<int> temp2(v.begin()+m+1, v.begin()+j+1); 
+//     int a = 0;
+//     int b = 0;
+//     while(a < temp1.size() || b < temp2.size() ){
+//         if(a < temp1.size() && (b >= temp2.size() || temp1[a] <= temp2[b]) ){  
+//             v[i] = temp1[a];
+//             ++a;
+//             ++i;
+//         }
+//         if(b < temp2.size() && (a >= temp1.size() || temp1[a] > temp2[b]) ){
+//             v[i] = temp1[b];
+//             ++b;
+//             ++i;
+//         }
+//     }
+//     return;
+// }
+
 void mergeSort(vector<int> &v, int i, int j){
     if(i >= j){
         return;
@@ -34,6 +55,7 @@ void mergeSort(vector<int> &v, int i, int j){
 int setPivot(vector<int> &v, int i, int j){
     // 用数组第一个数初始化轴点值
     int Pivot = v[i];
+    // 从数组两端开始搜索轴点应当处于的位置
     while(i < j){
         while((i < j) && (v[j] >= Pivot)){  // while(v[j] >= Pivot){
             --j;
@@ -45,7 +67,7 @@ int setPivot(vector<int> &v, int i, int j){
         }
         v[j] = v[i];
     }
-    // 将轴点值设置在轴点位置， 并返回轴点位置
+    // 注意将轴点值设置在轴点位置， 并返回轴点位置
     v[i] = Pivot;
     return i;
 }
