@@ -3,7 +3,7 @@
 
 using namespace std;
 
-/*************** mergesort ***************/
+/****************************** mergesort ******************************/
 void merge(vector<int> &v, int i, int m, int j){
     // 将v中前半段（即要用于归并的第一部分）复制到一个临时数组中以免被覆盖
     vector<int> temp(v.begin()+i, v.begin()+m+1); 
@@ -53,7 +53,8 @@ void mergeSort(vector<int> &v, int i, int j){
     merge(v, i, m ,j);
 }
 
-/*************** quicksort ***************/
+
+/****************************** quicksort ******************************/
 int setPivot(vector<int> &v, int i, int j){
     // 用数组第一个数初始化轴点值
     int Pivot = v[i];
@@ -84,7 +85,8 @@ void quickSort(vector<int> &v, int i, int j){
     quickSort(v, m+1, j);
 }
 
-/*************** main ***************/
+
+/****************************** main ******************************/
 int main(){
     vector<int> vec;
     int num;

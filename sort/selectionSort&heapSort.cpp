@@ -4,7 +4,7 @@
 
 using namespace std;
 
-/*************** selectionSort ***************/
+/****************************** selectionSort ******************************/
 int findMax(vector<int> &v, int beg, int end){
     int pos = beg;
     for(int i = beg + 1; i <= end; ++i){
@@ -23,7 +23,8 @@ void selectionSort(vector<int> &v, int beg, int end){
     }
 }
 
-/*************** heapSort ***************/
+
+/****************************** heapSort ******************************/
 void heapSort(vector<int> &v, int beg, int end){
     priority_queue<int> que(v.begin()+beg, v.begin()+end+1);
     while(beg <= end){
@@ -84,7 +85,8 @@ void heapSort3(vector<int> &v, int beg, int end){
     }
 }
 
-/*************** main ***************/
+
+/****************************** main ******************************/
 int main(){
     vector<int> vec;
     int num;
