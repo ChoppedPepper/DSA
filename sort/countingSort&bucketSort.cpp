@@ -1,4 +1,5 @@
 #include <vector>
+#include <list>
 #include <iostream>
 #include <climits>
 
@@ -56,40 +57,24 @@ void countingSort(vector<int> &num){
 
 
 /****************************** bucketsort ******************************/
-struct Node{
-    int val;
-    Node* next;
-    Node() = default;
-    Node(int a) : val(a), next(nullptr) { }
-};
-
-void countNum2(const vector<int>& num, vector<Node*>& temp, int& valMin){
+void countNum2(const vector<int>& num, vector<list<int>>& temp, int& valMin){
     // count, O(n)
-    for(int a : num){
-        Node* nodePtr = temp[a-valMin];  // hash(num[i]) = num[i] - valMin (rank of temp)        
-        if(nodePtr){
-            while(nodePtr->next){
-                nodePtr = nodePtr->next;
-            }        
-            Node* nodeTemp = new Node(a);
-            nodePtr->next = nodeTemp;            
-        }else{
-            temp[a-valMin] = new Node(a);
-        }        
+    for(int a : num){        
+        temp[a-valMin].push_back(a);  // hash(num[i]) = num[i] - valMin (rank of temp)      
     }    
     return;
 }
 
-void refillNum2(vector<int>& num, const vector<Node*>& temp){
+void refillNum2(vector<int>& num, const vector<list<int>>& temp){
     // O(valMax - valMin + 1)
-    // 遍历链表，依次取出节点值
+    // 遍历所有链表，依次取出节点值
     int j = 0;
     for(int i = 0; i < temp.size(); ++i){
-        Node* nodePtr = temp[i];
-        while(nodePtr){
-            num[j] = nodePtr->val;
-            ++j;
-            nodePtr = nodePtr->next;
+        list<int> lis = temp[i];
+        while(!lis.empty()){
+            num[j] = lis.front();
+            lis.pop_front();
+            ++j;            
         }        
     }
     return;
@@ -101,7 +86,7 @@ void bucketSort(vector<int> &num){
 
     // 构造一个桶数组, 其中hash(key) = key - valMin，桶单元vector[hash(key)]中存放key
     //                                             (为应对可能存在相同的key，实际存放一个链表)
-    vector<Node*> temp(valMax - valMin + 1, 0);
+    vector<list<int>> temp(valMax - valMin + 1);
     countNum2(num, temp, valMin);
 
     refillNum2(num, temp);
