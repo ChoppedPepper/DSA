@@ -6,6 +6,7 @@
 using namespace std;
 
 /****************************** countingsort ******************************/
+// O(n+M), stable
 void findMinMax(const vector<int>& num,  int& valMin, int& valMax){
     valMin = INT_MAX;
     valMax = INT_MIN;
@@ -61,6 +62,7 @@ void countingSort(vector<int> &num){
 
 
 /****************************** bucketsort ******************************/
+// O(n+M), stable
 void countNum2(const vector<int>& num, vector<list<int>>& temp, int& valMin){
     // count, O(n)
     for(int a : num){        
