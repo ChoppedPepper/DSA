@@ -28,17 +28,21 @@ void countNum(const vector<int>& num, vector<int>& temp, int& valMin){
     return;
 }
 
-void refillNum(vector<int>& num, const vector<int>& temp, int& valMin){
-    // O(valMax - valMin + 1)
-    // i+valMin 位于区间 [temp[i-1], temp[i]) 中
-    for(int i = 0; i < temp[1]; ++i){
-        num[i] = valMin;
+void refillNum(vector<int>& num, vector<int>& temp, int& valMin){
+    // O(n)
+    // num[i] = i+valMin 位于区间 [temp[i-1], temp[i]) 中
+    vector<int> temp2(num.size(), 0);  // 定义临时数组保存排序后的数组
+    for(int i = num.size() - 1; i >= 0; --i){  // 为保证稳定性，从后向前遍历num
+        temp2[temp[num[i]-valMin]-1] = num[i];
+        --temp[num[i]-valMin];      
     }
-    for(int i = 1; i < temp.size(); ++i){
-        for(int j = temp[i-1]; j < temp[i]; ++j){
-            num[j] = i + valMin;
-        }       
+
+    int j = 0;
+    for(int a : temp2){
+        num[j] = a;
+        ++j;
     }
+
     return;
 }
 
@@ -102,8 +106,8 @@ int main(){
         vec.push_back(num);
     }
 
-    // countingSort(vec);
-    bucketSort(vec);
+    countingSort(vec);
+    // bucketSort(vec);
 
     for(auto a : vec){
         cout << a << " ";
