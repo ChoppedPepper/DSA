@@ -9,7 +9,7 @@ using namespace std;
 void bubbleSort(vector<int>& vec, int beg, int end){
     while(beg < end){
         for(int i = 0; i < end; ++i){
-            if(vec[i] >  vec[i+1]){  // > 而不是 >=, 保证稳定性
+            if(vec[i] > vec[i+1]){  // > 而不是 >=, 保证稳定性
                 swap(vec[i], vec[i+1]);
             }
         }
@@ -22,7 +22,7 @@ void bubbleSort2(vector<int>& vec, int beg, int end){
     while(!isSorted){
         isSorted = true;
         for(int i = 0; i < end; ++i){
-            if(vec[i] >  vec[i+1]){ 
+            if(vec[i] > vec[i+1]){ 
                 swap(vec[i], vec[i+1]);
                 isSorted = false;
             }
@@ -84,12 +84,14 @@ void goDown(vector<int> &v, int beg, int end){  // 从 beg 处开始下滤
     }
     return;
 }
+
 void heapify(vector<int> &v, int beg, int end){
     int posFirstInNode = (end - beg - 1) >> 1; // 自下往上第一个内部节点（非叶节点）
     for(int i = posFirstInNode; i >= beg; --i){
         goDown(v, i, end);
     }
 }
+
 int popMax(vector<int> &v, int beg, int end){
     int valMax = v[beg];
     v[beg] = v[end];
