@@ -37,7 +37,6 @@ void insertionSort2(vector<int> &v, int beg, int end){
 
 /****************************** shellsort ******************************/
 // time complexity depends on the incremental sequence, unstable
-
 int findIncre(const vector<int>& seq, int length){
     int s = 0;
     for(int i = 0; i < seq.size(); ++i){
