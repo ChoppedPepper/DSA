@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // 判断能否划分（平等划分，即子集等于accumulations/2）
     bool canPartition(vector<int>& nums) {
         if(nums.empty()) return true;
         
@@ -20,7 +21,7 @@ public:
         return DP[V];
     }
 
-
+    // 计算划分方式的总数（子集等于target）
     int partitionSubsetSum(const vector<int>& nums, int target){
         vector<int> DP(target+1, 0);
         DP[0] = 1;
